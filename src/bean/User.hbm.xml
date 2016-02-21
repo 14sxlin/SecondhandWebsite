@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-2-17 23:31:35 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="bean.User" table="USER">
+        <id name="stuid" type="java.lang.String">
+            <column name="STUID" />
+            <generator class="assigned" />
+        </id>
+        <property name="username" type="java.lang.String">
+            <column name="USERNAME" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="shortnum" type="java.lang.String">
+            <column name="SHORTNUM" />
+        </property>
+        <property name="longnum" type="java.lang.String">
+            <column name="LONGNUM" />
+        </property>
+    </class>
+</hibernate-mapping>

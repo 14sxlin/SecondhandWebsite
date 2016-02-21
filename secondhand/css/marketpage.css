@@ -1,0 +1,35 @@
+/*给marketpage使用的css*/
+body{
+	margin:0;
+	font-family:微软雅黑;
+}
+
+.head{
+	background:#0066FF;
+	text-align:center;
+}
+
+.body{
+    background:red;
+	margin:0 auto;
+	width:800px;
+}
+
+.foot{
+	background:#CC6699;
+	clear:both;
+	height:50px;
+}
+
+ul,li{
+ margin:0px;
+ padding:0px;
+}
+li{
+ list-style:none;
+ text-align:center;
+ font-weight:bold;
+ border:3px solid #00CCFF;
+ height:50px;
+}
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>发布商品</title>
+</head>
+
+<body>
+ <form method="post" action="/SecondhandWebsite/publishShopping.do">
+	商品名称:<input type="text" name="shoppingname"/>
+	商品类型:<select name="shoppingtype">
+				<option>图书</option>
+				<option>衣鞋包</option>
+				<option>电子设备</option>
+				<option>食品</option>
+				<option>家居用品</option>
+				<option>其他</option>
+			</select><br/>
+	商品新旧程度:<input type="radio" name="newlevel" value="5" checked="checked" />五
+				<input type="radio" name="newlevel" value="6" />六
+				<input type="radio" name="newlevel" value="7" />七
+				<input type="radio" name="newlevel" value="8" />八
+				<input type="radio" name="newlevel" value="9" />九
+				<input type="radio" name="newlevel" value="10" /> 十 成新<br/>
+	价格:<input type="text" name="price" />元<br/>
+	备注:<textarea rows="5" cols="50" name="ps"></textarea>
+	<input type="submit" value="提交" /><input type="reset" value="重置" /><br/>
+  </form>
+</body>
+</html>

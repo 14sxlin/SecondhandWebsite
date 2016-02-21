@@ -1,0 +1,94 @@
+/* 给welcome页面用的 采用头中尾,中间两列布局 */
+body{
+    margin:0;
+    padding:0;
+}
+
+.head{
+    background:#0066FF;
+
+}
+
+.body{
+    background:red;
+    margin:0 auto;
+    width:800px;
+}
+
+.bottom{
+    background:#CC6699;
+    clear:both;
+}
+
+.left{
+    width:400px;
+    float:left;
+    background::#FFCCFF;
+}
+
+.right{
+    width:400px;
+    background:#009966;
+    float:left;
+}
+
+ul,li{
+ margin:0px;
+ padding:0px;
+}
+
+li{
+ list-style:none;
+ text-align:center;
+ font-weight:bold;
+ border:3px solid #00CCFF;
+ height:100px;
+}
+
+a:link {color: blue; text-decoration:none;} 
+
+/* 给首页的商品条目使用 
+
+<span class="username">用户名</span>
+<span class="shoppingname">商品名</span>
+<span class="price">35</span>
+<span class="date">2016-02-14</span>                
+
+*/
+.shoppingname{
+    float:left;
+    line-height:100px;
+    height:100px;
+    width:120px;
+}
+
+.innerRight{
+    float:right;
+    height:100px;
+    width:200px;
+}
+
+.username{
+    text-align:right;
+    display:block;
+    font-family:微软雅黑;
+    font-size:20px;
+    color:#0000FF
+}
+
+.date{
+    text-align:right;
+    display:block;
+    font-size:10px;
+}
+
+.price{
+    height:50px;
+    color:#FF0000;
+    display:block;
+    font-size:50px;
+}
+
+li:hover{
+	background:#80ffff;
+}
