@@ -1,7 +1,6 @@
-package pagecontent;
+package update;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,28 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.WantBuy;
-import database.WantBuyDAO;
-import net.sf.json.JSONArray;
+import database.ShoppingDAO;
 
 /**
- * Servlet implementation class WantbuyItemQuery
+ * Servlet implementation class UpdateState
  */
-@WebServlet(asyncSupported = true, urlPatterns = {"/wantbuyitems"})
-public class WantbuyItemQuery extends HttpServlet {
+@WebServlet("/updateshoppingstate.do")
+public class UpdateShoppingState extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<WantBuy> wantbuylist =WantBuyDAO.queryItems(10);
-		JSONArray jwantbuy = JSONArray.fromObject(wantbuylist);
-		response.setContentType("text/html;cahrset=utf-8");
-		response.setCharacterEncoding("utf-8");
-		response.addHeader( "Cache-Control", "no-cache" );
-//		System.out.println("wantbuylist = "+jwantbuy.toString());
-		response.getWriter().println(jwantbuy.toString());
+		int id = Integer.parseInt((String) request.getParameter("id"));
+		String newstate = request.getParameter("newstate");
+		ShoppingDAO.updateStateById(id, newstate);
+		response.sendRedirect("/SecondhandWebsite/userquery.do");
 	}
 
 	/**

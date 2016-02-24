@@ -1,7 +1,6 @@
-package pagecontent;
+package message;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,28 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.WantBuy;
-import database.WantBuyDAO;
-import net.sf.json.JSONArray;
+import bean.Message;
+import database.DAOTool;
 
 /**
- * Servlet implementation class WantbuyItemQuery
+ * Servlet implementation class SendMessage
  */
-@WebServlet(asyncSupported = true, urlPatterns = {"/wantbuyitems"})
-public class WantbuyItemQuery extends HttpServlet {
+@WebServlet(asyncSupported = true, urlPatterns = { "/sendMessage.do" })
+public class SendMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<WantBuy> wantbuylist =WantBuyDAO.queryItems(10);
-		JSONArray jwantbuy = JSONArray.fromObject(wantbuylist);
-		response.setContentType("text/html;cahrset=utf-8");
-		response.setCharacterEncoding("utf-8");
-		response.addHeader( "Cache-Control", "no-cache" );
-//		System.out.println("wantbuylist = "+jwantbuy.toString());
-		response.getWriter().println(jwantbuy.toString());
+		String mfrom = request.getParameter("mfrom");
+		String mto = request.getParameter("mto");
+		String message = request.getParameter("message");
+		// TODO System Output Test Block
+		System.out.println(
+				" mfrom ;  mto ; message =  "+mfrom+"  ;  "+mto+"  ;  "+message);
+		Message mesageBean = new Message();
+		mesageBean.setContent(message);
+		mesageBean.setMfrom(mfrom);
+		mesageBean.setMto(mto);
+		mesageBean.setState("unread");
+		DAOTool.save(mesageBean);
 	}
 
 	/**

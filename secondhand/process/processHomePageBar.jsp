@@ -18,7 +18,7 @@
 	  }
   if(isLogin)
 	  out.println("<div align=\"right\">"+
-			   "<a href=\"userquery.do\">"+username.getValue()+"</a></div>");
+			   "<a id=\"myusername\" href=\"userquery.do\">"+username.getValue()+"</a></div>");
   else
   {
 	  out.println("<div align=\"right\"><input type=\"button\" value=\"登录\" onclick=\"location='login.jsp'\"/>"); 

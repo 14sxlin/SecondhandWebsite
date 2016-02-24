@@ -21,13 +21,14 @@
 我的商品:<br/>
 <table>
         <tr><th>商品名</th><th>新旧程度</th><th>商品类型</th>
-                  <th>价格</th><th>发布日期</th><th>状态</th><th>备注</th></tr>
+                  <th>价格</th><th>发布日期</th><th>状态</th><th>备注</th>
+                  <th>管理</th></tr>
 <c:if test="${shoppinglist!=null}">
 <c:forEach var="shopping" items="${shoppinglist}">
     <tr>
     <td><c:out value="${shopping.shoppingname}"></c:out></td>
     <td><c:out value="${shopping.newlevel}成新"></c:out></td>
-    <td><mytag:trans type="${shopping.type }"></mytag:trans></td>
+    <td><mytag:typetrans type="${shopping.type }"></mytag:typetrans></td>
     <td><c:out value="${shopping.price}"></c:out></td>
     <fmt:parseDate var="thisdate" pattern="YYYY-MM-dd HH:mm:ss.S" 
                         value="${shopping.publishdate}"></fmt:parseDate>
@@ -35,6 +36,13 @@
    <td><c:out value="${mydate}"></c:out></td>
     <td><c:out value="${shopping.state}"></c:out></td>
     <td><c:out value="${shopping.ps }"></c:out></td>
+    <c:if test="${shopping.state=='displaying'}">
+    <td>
+         <a href="/SecondhandWebsite/updateshoppingstate.do?id=${shopping.shopping_id}
+                            &newstate=finish">已完成</a>
+          <a href="/SecondhandWebsite/updateshoppingstate.do?id=${shopping.shopping_id}
+                            &newstate=cancel">取消</a></td>
+    </c:if>
     </tr>
 </c:forEach>
 </c:if>
@@ -42,7 +50,8 @@
 
 我的求购:<br/>
 <table>
-        <tr><th>商品名</th><th>报价</th><th>发布日期</th><th>状态</th><th>备注</th></tr>
+        <tr><th>商品名</th><th>报价</th><th>发布日期</th>
+        <th>状态</th><th>备注</th><th>管理</th></tr>
         <c:if test="${wantbuylist!=null }">
         <c:forEach var="wantbuy" items="${wantbuylist}">
         <tr>
@@ -54,6 +63,13 @@
    <td><c:out value="${mydate1}"></c:out></td>
         <td><c:out value="${wantbuy.state }"></c:out></td>
         <td><c:out value="${wantbuy.ps }"></c:out></td>
+         <c:if test="${wantbuy.state=='displaying'}">
+             <td>
+                <a href="/SecondhandWebsite/updatewantbuystate.do?id=${wantbuy.id}
+                            &newstate=finish">已完成</a>
+                <a href="/SecondhandWebsite/updatewantbuystate.do?id=${wantbuy.id}
+                            &newstate=cancel">取消</a></td>
+        </c:if>
         </tr>
         </c:forEach>
         </c:if>

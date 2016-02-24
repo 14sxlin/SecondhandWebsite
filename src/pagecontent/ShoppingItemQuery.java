@@ -27,7 +27,7 @@ public class ShoppingItemQuery extends HttpServlet {
 		response.setContentType("text/html;cahrset=utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.addHeader( "Cache-Control", "no-cache" );
-		System.out.println(jshopping.toString());
+//		System.out.println(jshopping.toString());
 		response.getWriter().println(jshopping.toString());
 		
 	}

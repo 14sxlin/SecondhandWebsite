@@ -1,6 +1,7 @@
 package publish;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.WantBuy;
-import database.WantBuyDAO;
+import database.DAOTool;
 
 /**
  * Servlet implementation class WantBuy
@@ -45,9 +46,10 @@ public class PublishWantBuy extends HttpServlet {
 		WantBuy wantbuy = new WantBuy();
 		wantbuy.setShoppingname(shoppingname);
 		wantbuy.setUsername(username);
-		wantbuy.setPs(price);
+		wantbuy.setPrice(Integer.parseInt(price.trim()));
 		wantbuy.setPs(ps);
-		WantBuyDAO.save(wantbuy);
+		wantbuy.setState("displaying");
+		DAOTool.save(wantbuy);
 		response.sendRedirect("outcome/wantbuysuccess.html");
 	}
 

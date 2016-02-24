@@ -21,5 +21,15 @@
         <name>state</name>
         <required>true</required>
         <rtexprvalue>true</rtexprvalue>
-    </attribute></tag>
+    </attribute>
+   </tag>
+  <tag>
+    <name>datetrans</name>
+    <tag-class>tag.DateTrans</tag-class>
+    <attribute>
+        <name>dateString</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+   </tag>
 </taglib>

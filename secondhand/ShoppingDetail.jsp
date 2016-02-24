@@ -17,7 +17,7 @@
 发布日期:${shopping.publishdate }<br/>
 发布用户:${shopping.username }<br/>
 新旧程度:${shopping.newlevel }<br/>
-类型:<mytag:trans type="${shopping.type}"></mytag:trans><br/>
+类型:<mytag:typetrans type="${shopping.type}"></mytag:typetrans><br/>
 价格:${shopping.price }<br/>
 <%
 User user = (User)request.getAttribute("user");

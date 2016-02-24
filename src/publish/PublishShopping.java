@@ -11,12 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 import bean.Shopping;
+import database.DAOTool;
 
 /**
  * Servlet implementation class PublishShopping
@@ -69,12 +65,8 @@ public class PublishShopping extends HttpServlet {
 			//这里是没有登录的情况,找不到用户名
 			shopping.setUsername(null);
 		}
-		Configuration conf = new Configuration().configure();
-		SessionFactory fac = conf.buildSessionFactory();
-		Session session = fac.openSession();
-		Transaction tran = session.beginTransaction();
-		session.save(shopping);
-		tran.commit();
+		
+		DAOTool.save(shopping);
 		
 		response.setContentType("text/charset=utf-8");
 		request.getRequestDispatcher("outcome/pubsuccess.html").forward(request, response);
