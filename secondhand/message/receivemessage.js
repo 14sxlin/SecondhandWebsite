@@ -1,3 +1,5 @@
+document.write("<script type=\"text/javascript\" src=\"message/deleteMessage.js\" " +
+		"charset=\"utf-8\"></script>");
 var e = window.event; 
 function receiveMessage()
 {
@@ -28,6 +30,7 @@ function receiveMessage()
 				 }); 
 				$("#mymessage").html();
 				$.each(data,function(index,message){
+					var id = message.id;
 $("#mymessage").append(
 		"<span id='mfrom'>"+message.mfrom +" 对你说 :</span>");
 $("#mymessage").append(
@@ -35,21 +38,22 @@ $("#mymessage").append(
 $("#mymessage").append(
 		"<span id='date'>"+getDateDiff(message.publishdate)+"</span>");
 $("#mymessage").append(
-"<input id='read' type='checkbox' checked='checked'  name='read'>已阅</input>");
-$("#mymessage").append(
 "<input id='replay' type='button' value='回复'  " +
 "onclick=\"getData('"+message.mfrom+"')\"></input>");
+$("#mymessage").append(
+		"<input id='"+message.id+"' type='checkbox' name='read'>删除</input>");
 $("#mymessage").append("<br/>");
-				});}
-			else{
-				
-			}
+$("#"+message.id).change(function(){
+	if($("#"+message.id).prop("checked")){
+		changeMessageState(message.id);
+	}
+})
+				});
+			}else{}
+			
 		}
 	});
 }
-
-
-
 
  /**
   * 下面是一些基础函数，解决mouseover与mouserout事件不停切换的问题（问题不是由冒泡产生的）
