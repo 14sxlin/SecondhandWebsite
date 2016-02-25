@@ -36,9 +36,12 @@ public class ReceiveMessage extends HttpServlet {
 			}
 			response.setCharacterEncoding("utf-8");
 			List<Message> mlist = MessageDAO.findUnreadMessage(toname);
+			
 			if(mlist!=null)
 			{
 				JSONArray jsonlist = JSONArray.fromObject(mlist);
+				// TODO Auto-generated catch block
+				System.out.println(" list =  "+jsonlist.toString());
 				response.getWriter().println(jsonlist.toString());
 			}else {
 				response.getWriter().println("Œﬁ–≈œ¢");

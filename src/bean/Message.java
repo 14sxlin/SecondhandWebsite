@@ -2,10 +2,28 @@ package bean;
 
 public class Message {
 
+	private int id;
 	private String mfrom;
 	private String mto;
 	private String content;
+	private String publishdate;
 	private String state;
+	
+	
+	
+	public String getPublishdate() {
+		return publishdate;
+	}
+	public void setPublishdate(String publishdate) {
+		this.publishdate = publishdate;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getMfrom() {
 		return mfrom;
 	}

@@ -5,10 +5,10 @@ var mfrom;
 var mto;
 var message;
 
-function getData(username)
+function getData(toname)
 {
 	mfrom = $("#myusername").html();
-	mto = username;
+	mto = toname;
 	if(mfrom==null)
     {
 		alert("请先登录");
@@ -35,7 +35,7 @@ $(document).ready(function(){
 	$("#send").click(function(event){
 		event=event||window.event;
 		event.stopPropagation();
-		var message = $("#message").val();
+		var message = $("#send_message").val();
 		if(message==""||message==null)
 		{
 			alert("留言不能为空");
@@ -43,6 +43,7 @@ $(document).ready(function(){
 		}
 		sendMessage(message);
 		console.log("message="+message);
+		$("#send_message").val("");
 		disablePopup();
 	});
 });

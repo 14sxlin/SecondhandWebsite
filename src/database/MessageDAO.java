@@ -23,7 +23,7 @@ public class MessageDAO {
 	@SuppressWarnings("unchecked")
 	public static List<Message> findUnreadMessage(String toname)
 	{
-		String hql = "from Message where mto='"+toname+"' and state='unread'";
+		String hql = "from Message  m where m.mto='"+toname+"' and m.state='unread'";
 		Query query = DAOTool.query(hql);
 		if(query.list().size()!=0)
 			return query.list();

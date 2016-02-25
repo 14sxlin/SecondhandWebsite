@@ -18,6 +18,7 @@
 <body>
     <div class="head">
         <%@include file="../process/processHomePageBar.jsp" %>
+        <%@include file="../process/showMessage.jsp" %>
     </div>
     <div class="body">
         <div class="left">
@@ -42,7 +43,7 @@
      <div id="popupContact">  
         <a id="popupContactClose">[X]</a>  
         <h1>给TA留言</h1>  
-         <input id="message" type="text" name="message"/><br />
+         <input id="send_message" type="text" name="message"/><br />
          <input id="send" type="button" value="提交"><br/>
          <span style="color:red">小贴士:如果对方长时间没回复,发送短信给TA比较好</span>
      </div>  
