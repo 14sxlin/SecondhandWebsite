@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="bean.User" table="USER">
         <id name="stuid" type="java.lang.String">
-            <column name="STUID" />
+            <column name="STU_ID" />
             <generator class="assigned" />
         </id>
         <property name="username" type="java.lang.String">

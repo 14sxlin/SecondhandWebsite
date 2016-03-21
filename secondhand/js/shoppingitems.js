@@ -6,7 +6,7 @@ function loadShopping(){
 	    type:"get",
 	    success:function(data){
 	    	console.log(data.length);
-	    		if(data.length!=1){
+//	    		if(data.length!=1){
 	            	$("#shopUL").html("");
 	            	$.each(data,function(index,shopping)
 	                {
@@ -27,7 +27,7 @@ function loadShopping(){
 //	                     console.log(index);
 	                })
 //	                console.log(data);
-	            }
+//	            }
 	         }
 	    });
 }
