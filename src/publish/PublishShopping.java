@@ -1,15 +1,24 @@
 package publish;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import bean.Shopping;
 import database.DAOTool;
@@ -25,15 +34,98 @@ public class PublishShopping extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String shoppingname = request.getParameter("shoppingname");
 		String shoppingtype = request.getParameter("shoppingtype");
-		String newlevel = request.getParameter("newlevel");
+		String newlevel = request.getParameter("level");
 		String price = request.getParameter("price");
 		String ps = request.getParameter("ps");
-		// TODO System Output Test Block
-	//	System.out.println(shoppingname +"  "+shoppingtype+"  "+newlevel+" "+price);
-	// 小火车  图书  10 23
+		Shopping shopping = new Shopping();
+		String username = null;
+		try {
+			for(Cookie c:request.getCookies()) {
+				if(c.getName().equals("username") && c.getValue()!= null)
+				{
+					shopping.setUsername(c.getValue());
+					username = c.getValue();
+					break;
+				}
+			}
+		} catch (NullPointerException e) {
+			//这里是没有登录的情况,找不到用户名
+			shopping.setUsername(null);
+		}
+		
+		//创建配置工厂
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		//设置文件的管理类
+		ServletFileUpload file = new ServletFileUpload(factory);
+		//设置文件的大小 4M 超过的话抛出fileuploadexception
+		file.setFileSizeMax(4*1024*1024);
+		
+		//检查上传的目录
+		ServletContext sc = this.getServletContext();
+		String storePath = sc.getRealPath("/uploadpicture");
+		File storeDir = new File(storePath);
+		if(!storeDir.exists())
+			storeDir.mkdirs();
+		
+		
+		//获取上传的文件列表
+		try {
+			List<FileItem> filelist = file.parseRequest(
+						new ServletRequestContext(request));
+			for(FileItem item:filelist)
+			{
+				// TODO System Output Test Block
+//				System.out.println(" item =  "+item.isFormField());
+//				System.out.println(" item =  "+item.getFieldName());
+				if(item!=null&&item.isFormField())//如果是文件而不是表单数据
+				{
+					if(item.getFieldName().equals("shoppingname")){
+						shoppingname = item.getString("utf-8");
+					}
+					if(item.getFieldName().equals("shoppingtype")){
+						shoppingtype =  item.getString("utf-8");
+					}
+					}
+					if(item.getFieldName().equals("level")){
+						newlevel = item.getString("utf-8");
+					}
+					if(item.getFieldName().equals("price")){
+						price  = item.getString("utf-8");
+					}
+					if(item.getFieldName().equals("ps")){
+						ps = item.getString("utf-8");
+				}else
+				{
+					if (item!=null&&item.getName()!=null) {
+						//用  用户名_商品名 来建立文件夹,里面的图片就是该商品的图片
+						File dir = new File(storePath + "\\" + username + "_" + shoppingname);
+						if (!dir.exists())
+							dir.mkdir();
+						// TODO System Output Test Block
+//						System.out.println(" dir path =  " + dir.getAbsolutePath());
+						String fullname = item.getName();
+//						System.out.println(" toSave =  " + item.getName());
+						String filename = fullname.substring(fullname.lastIndexOf("\\") + 1);
+						File toSave = new File(dir.getPath() + "\\" + filename);
+						// TODO System Output Test Block
+						System.out.println(" toSave =  " + toSave.getPath());
+						try {
+							item.write(toSave);
+						} catch (Exception e) {
+							//TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+					} 
+				}
+					
+			}
+			
+		} catch (FileUploadException e) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//组装对象,但是还缺少用户的信息
-		Shopping shopping = new Shopping();
 		shopping.setShoppingname(shoppingname);
 		shopping.setNewlevel(Integer.parseInt(newlevel));
 		shopping.setPrice(Integer.parseInt(price));
@@ -53,21 +145,9 @@ public class PublishShopping extends HttpServlet {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
 		shopping.setPublishdate(sdf.format(new Date()));
 		shopping.setPs(ps);
-		try {
-			for(Cookie c:request.getCookies()) {
-				if(c.getName().equals("username") && c.getValue()!= null)
-				{
-					shopping.setUsername(c.getValue());
-					break;
-				}
-			}
-		} catch (NullPointerException e) {
-			//这里是没有登录的情况,找不到用户名
-			shopping.setUsername(null);
-		}
+		
 		
 		DAOTool.save(shopping);
-		
 		response.setContentType("text/charset=utf-8");
 		request.getRequestDispatcher("outcome/pubsuccess.html").forward(request, response);
 		

@@ -1,10 +1,3 @@
-/message/
-/pagecontent/
-/picture/
+/coreservlet/
+/fileupload/
 /publish/
-/query/
-/tag/
-/test/
-/update/
-/usermanage/
-/bean/

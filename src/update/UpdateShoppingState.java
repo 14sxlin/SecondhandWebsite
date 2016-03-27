@@ -21,8 +21,8 @@ public class UpdateShoppingState extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt((String) request.getParameter("id"));
-		String newstate = request.getParameter("newstate");
+		int id = Integer.parseInt((String) request.getParameter("id").trim());
+		String newstate = request.getParameter("newstate").trim();
 		ShoppingDAO.updateStateById(id, newstate);
 		response.sendRedirect("/SecondhandWebsite/userquery.do");
 	}
