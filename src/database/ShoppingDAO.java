@@ -25,10 +25,9 @@ public class ShoppingDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static List<Shopping> queryItems(int maxitems) 
+	public static List<Shopping> queryItems(int maxitems,String condition) 
 	{
-		Query query =  DAOTool.query("from Shopping where state='displaying' "
-				+ "order by publishdate desc ");
+		Query query =  DAOTool.query("from Shopping where "+condition);
 		query.setMaxResults(maxitems);
 		if(!query.list().isEmpty())
 			return (List<Shopping>)query.list();

@@ -77,7 +77,7 @@ public class PublishShopping extends HttpServlet {
 				// TODO System Output Test Block
 //				System.out.println(" item =  "+item.isFormField());
 //				System.out.println(" item =  "+item.getFieldName());
-				if(item!=null&&item.isFormField())//如果是文件而不是表单数据
+				if(item!=null&&item.isFormField()&&item.getFieldName()!=null)//如果是文件而不是表单数据
 				{
 					if(item.getFieldName().equals("shoppingname")){
 						shoppingname = item.getString("utf-8");

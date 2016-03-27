@@ -1,4 +1,4 @@
-package pagecontent;
+package query;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +21,7 @@ public class ShoppingItemQuery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Shopping> shoppinglist = ShoppingDAO.queryItems(10);
+		List<Shopping> shoppinglist = ShoppingDAO.queryItems(10,"state='displaying' order by publishdate desc ");
 		JSONArray jshopping = JSONArray.fromObject(shoppinglist);
 		
 		response.setContentType("text/html;cahrset=utf-8");
