@@ -1,5 +1,7 @@
 package database;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,5 +56,16 @@ public class DAOTool {
 		tran.commit();
 	}
 	
-
+	@SuppressWarnings("unchecked")
+	public static  List<Object> queryByPage(String hql, final Page page) {  
+		Configuration conf = new Configuration().configure();
+		SessionFactory fac = conf.buildSessionFactory();
+		Session session = fac.openSession();
+		Query query = session.createQuery(hql);  
+        //设置每页显示多少个，设置多大结果。  
+        query.setMaxResults(page.getEveryPage());  
+        //设置起点  
+        query.setFirstResult(page.getBeginIndex());  
+        return query.list();        
+	}
 }

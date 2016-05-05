@@ -8,6 +8,7 @@ import bean.Shopping;
 
 public class ShoppingDAO {
 
+	public static final  String  hql = "from Shopping ";
 	@SuppressWarnings("unchecked")
 	public static List<Shopping> queryShoppingByUsername(String username)
 	{

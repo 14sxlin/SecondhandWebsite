@@ -1,6 +1,6 @@
-/coreservlet/
-/fileupload/
-/publish/
-/pagecontent/
-/query/
+/bean/
 /database/
+/servlet/
+/tag/
+/test/
+/usermanage/

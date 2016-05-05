@@ -29,6 +29,6 @@ if(user!=null)
 		  out.print("短号:"+user.getShortnum()+"<br/>");
 }
 %>
-<a href="/SecondhandWebsite/">返回首页</a>
+<a href="/SecondhandWebsite/welcome">返回首页</a>
 </body>
 </html>

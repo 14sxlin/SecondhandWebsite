@@ -10,7 +10,9 @@ var index = dateString.indexOf(".");
 dateString = dateString.substring(0, index);
 dateString = dateString.replace(/-/g,"/");
 var dateTimeStamp = new Date(dateString);
-var diffValue = now - dateTimeStamp;
+
+var diffValue = now - dateTimeStamp.getTime();
+console.log(diffValue);
 if(diffValue < 0){
  //若日期不符则弹出窗口告之
  //alert("结束日期不能小于开始日期！");
