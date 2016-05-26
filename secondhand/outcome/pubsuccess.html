@@ -8,7 +8,7 @@ var t=3;//设定跳转的时间
 setInterval("refer()",3000); //启动1秒定时 
 function refer(){  
     if(t==0){ 
-        location="default.jsp"; //#设定跳转的链接地址 
+        location="welcome"; //#设定跳转的链接地址 
     } 
     document.getElementById('show').innerHTML=""+t+"秒后返回首页"; // 显示倒计时 
     t--; // 计数器递减 
@@ -18,6 +18,6 @@ function refer(){
 <body>
     <div style="margin: 0 auto;">发布成功</div>
     <div id="show"></div>
-    <a href="default.jsp">返回首页</a>
+    <a href="welcome">返回首页</a>
 </body>
 </html>

@@ -32,4 +32,13 @@
         <rtexprvalue>true</rtexprvalue>
     </attribute>
    </tag>
+   <tag>
+        <name>pathChoose</name>
+        <tag-class>tag.PictureChooser</tag-class>
+     <attribute>
+        <name>type</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+    </attribute>
+   </tag>
 </taglib>

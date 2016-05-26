@@ -19,7 +19,6 @@ import database.UserDAO;
 @WebServlet("/shoppingquery.do")
 public class ShoppingDetailQuery extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//¥´ ‰…Ã∆∑
 		Shopping shopping = ShoppingDAO.queryShoppingById(request.getParameter("id"));
@@ -32,7 +31,7 @@ public class ShoppingDetailQuery extends HttpServlet {
 		{	 user= UserDAO.queryUserByName(username);
 			request.setAttribute("user", user);
 		}
-		request.getRequestDispatcher("ShoppingDetail.jsp")
+		request.getRequestDispatcher("jsp/detail.jsp")
 		   .forward(request, response);
 	}
 	

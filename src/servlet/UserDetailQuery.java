@@ -35,7 +35,7 @@ public class UserDetailQuery extends HttpServlet {
 //		List<WantBuy> wantbuylist = WantBuyDAO.queryWantbuyByUsername(username);
 //		request.setAttribute("wantbuylist", wantbuylist);
 		
-		request.getRequestDispatcher("jsp/userinfo.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/UserInfo-myproduct.jsp").forward(request, response);
 	}
 
 	/**

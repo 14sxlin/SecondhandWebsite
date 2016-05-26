@@ -33,11 +33,11 @@ public class ShoppingCatalogQuery extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String queryType =  request.getParameter("queryType").trim();
-		String pNum = (String)request.getParameter("page");
+		String pNum = (String)request.getParameter("pageNum");
 		int pageNum = 1;
 		if(pNum!=null&&!pNum.equals(""))
 			pageNum = Integer.parseInt(pNum);
-		Page page = PageUtil.createPage(10, 200, pageNum);
+		Page page = PageUtil.createPage(10, ShoppingDAO.getTotalCount(queryType), pageNum);
 		List<Object> result = 
 				DAOTool.queryByPage(ShoppingDAO.hql+
 						" where type="+queryType
@@ -45,8 +45,6 @@ public class ShoppingCatalogQuery extends HttpServlet {
 						, page);
 		if(result!=null)
 		{
-			// TODO System Output Test Block
-			System.out.println(" length =  "+result.size());
 			request.setAttribute("page", page);
 			request.setAttribute("result", result);
 			request.setAttribute("type", queryType);

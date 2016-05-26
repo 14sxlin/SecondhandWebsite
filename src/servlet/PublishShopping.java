@@ -32,6 +32,7 @@ public class PublishShopping extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		boolean hasPic = false;
 		String shoppingname = request.getParameter("shoppingname");
 		String shoppingtype = request.getParameter("shoppingtype");
 		String newlevel = request.getParameter("level");
@@ -94,21 +95,17 @@ public class PublishShopping extends HttpServlet {
 					}
 					if(item.getFieldName().equals("ps")){
 						ps = item.getString("utf-8");
-				}else
+				}else if(item.getSize()>0)
 				{
+					hasPic  =true;
 					if (item!=null&&item.getName()!=null) {
 						//用  用户名_商品名 来建立文件夹,里面的图片就是该商品的图片
-						File dir = new File(storePath + "\\" + username + "_" + shoppingname);
+						File dir = new File(storePath + "\\" + username);
 						if (!dir.exists())
 							dir.mkdir();
-						// TODO System Output Test Block
-//						System.out.println(" dir path =  " + dir.getAbsolutePath());
-						String fullname = item.getName();
-//						System.out.println(" toSave =  " + item.getName());
-						String filename = fullname.substring(fullname.lastIndexOf("\\") + 1);
-						File toSave = new File(dir.getPath() + "\\" + filename);
-						// TODO System Output Test Block
-						System.out.println(" toSave =  " + toSave.getPath());
+						File toSave = new File(dir.getPath() + "\\" + shoppingname+".jpg");
+//						System.out.println(" toSave =  " + toSave.getPath());
+//						System.out.println(" size  =  " + item.getSize());
 						try {
 							item.write(toSave);
 						} catch (Exception e) {
@@ -129,6 +126,12 @@ public class PublishShopping extends HttpServlet {
 		shopping.setShoppingname(shoppingname);
 		shopping.setNewlevel(Integer.parseInt(newlevel));
 		shopping.setPrice(Integer.parseInt(price));
+		// TODO System Output Test Block
+		System.out.println(" hasPicture  = "+hasPic);
+		if(hasPic) 
+			shopping.setHasPicture("1");
+		else shopping.setHasPicture("0");
+		
 		int typeid = 6;
 		switch(shoppingtype)
 		{

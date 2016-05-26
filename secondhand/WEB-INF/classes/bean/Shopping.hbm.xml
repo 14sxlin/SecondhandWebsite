@@ -32,5 +32,8 @@
         <property name="ps" type="java.lang.String">
             <column name="PS" />
         </property>
+        <property name="hasPicture" type="java.lang.String">
+            <column name="HASPICTURE" />
+        </property>
     </class>
 </hibernate-mapping>

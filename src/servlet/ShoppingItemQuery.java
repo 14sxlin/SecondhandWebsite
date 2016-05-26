@@ -33,7 +33,7 @@ public class ShoppingItemQuery extends HttpServlet {
 		int num = 1;
 		if(pagenum!=null)
 			num = Integer.parseInt(pagenum);
-		Page page = PageUtil.createPage(10, 200, num);
+		Page page = PageUtil.createPage(10, ShoppingDAO.getTotalCount(), num);
 		List<Object> shoppinglist  = DAOTool.queryByPage(ShoppingDAO.hql+
 				"where state='displaying' order by publishdate desc ", page);
 		request.setAttribute("page", page);

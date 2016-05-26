@@ -58,7 +58,12 @@
                            <li class="span3">
                                       <div class="thumbnail ">
                                       <p>
-                                          <img alt="400x300" src="img/people.jpg" />
+                                          <c:if test="${item.hasPicture eq '1'}">
+                                          <img alt="${item.shoppingname}" src="uploadpicture/${item.username}/${item.shoppingname}.jpg" height="100" width="200" />
+                                        </c:if>
+                                        <c:if test="${item.hasPicture eq '0'}">
+                                          <img alt="400*300" src="pic/<mytag:pathChoose type="${item.type}"></mytag:pathChoose>" height="100" width="200" />
+                                        </c:if>
                                       </p>
                                       <div class="caption">
                                           <h3>
@@ -81,7 +86,7 @@
                         </c:forEach>
                     </ul>
             <div class="pagination pagination-centered">
-                <ul>
+               <ul>
                     <c:choose>
                         <c:when test="${page.currentPage==1 }">
                              <li class="disable">
@@ -90,29 +95,46 @@
                         </c:when>
                         <c:otherwise>
                              <li>
-                                <a href="page?pageNum=${page.currentPage-1}">上一页</a>
+                                <a href="type?pageNum=${page.currentPage-1}&queryType=${type}">上一页</a>
                              </li>
                         </c:otherwise>
                       </c:choose>
                     
                     <li class="active disable">
-                        <a href="type" >${page.currentPage}</a>
+                        <a href="type?pageNum=${page.currentPage}&queryType=${type}">${page.currentPage}</a>
                     </li>
+                    <c:if test="${page.currentPage+1<=page.totalPage}">
                     <li>
-                        <a href="type?page=${page.currentPage+1}&queryType=${type}">${page.currentPage+1}</a>
+                        <a href="type?pageNum=${page.currentPage+1}&queryType=${type}">${page.currentPage+1}</a>
                     </li>
+                    </c:if>
+                    <c:if test="${page.currentPage+2<=page.totalPage}">
                     <li>
-                        <a href="type?page=${page.currentPage+2}&queryType=${type}">${page.currentPage+2}</a>
+                        <a href="type?pageNum=${page.currentPage+2}&queryType=${type}">${page.currentPage+2}</a>
                     </li>
+                    </c:if>
+                    <c:if test="${page.currentPage+3<=page.totalPage}">
                     <li>
-                        <a href="type?page=${page.currentPage+3}&queryType=${type}">${page.currentPage+3}</a>
+                        <a href="type?pageNum=${page.currentPage+3}&queryType=${type}">${page.currentPage+3}</a>
                     </li>
+                    </c:if>
+                    <c:if test="${page.currentPage+4<=page.totalPage}">
                     <li>
-                        <a href="type?page=${page.currentPage+4}&queryType=${type}">${page.currentPage+4}</a>
+                        <a href="type?pageNum=${page.currentPage+4}&queryType=${type}">${page.currentPage+4}</a>
                     </li>
+                    </c:if>
+                    <c:choose>
+                    <c:when test="${page.currentPage+1<=page.totalPage}">
                     <li>
-                        <a href="type?page=${page.currentPage+1}&queryType=${type}">下一页</a>
+                        <a href="type?pageNum=${page.currentPage+1}&queryType=${type}">下一页</a>
                     </li>
+                    </c:when>
+                   <c:otherwise>
+                    <li class="disable">
+                         <a>已是最后一页</a>
+                      </li>
+                   </c:otherwise>
+                    </c:choose>
                 </ul>
             </div>
         </div>

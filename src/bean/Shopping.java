@@ -10,7 +10,14 @@ public class Shopping {
 	private String state;
 	private String publishdate;
 	private String ps;
+	private String hasPicture;
 
+	public String getHasPicture() {
+		return hasPicture;
+	}
+	public void setHasPicture(String hasPicture) {
+		this.hasPicture = hasPicture;
+	}
 	public String getPs() {
 		return ps;
 	}

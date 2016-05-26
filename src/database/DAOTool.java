@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 public class DAOTool {
 
-
+	
 	public static void save(Object bean)
 	{
 		Configuration conf = new Configuration().configure();
@@ -28,11 +28,11 @@ public class DAOTool {
 	
 	public static void deleteByCondition(String tablename,String condition)
 	{
-		String hql = "delete "+tablename+" where "+condition;
 		Configuration conf = new Configuration().configure();
 		SessionFactory fac = conf.buildSessionFactory();
 		Session session = fac.openSession();
 		Transaction tran = session.beginTransaction();
+		String hql = "delete "+tablename+" where "+condition;
 		session.createQuery(hql).executeUpdate();
 		tran.commit();
 	}

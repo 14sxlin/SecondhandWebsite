@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,17 @@ public class UpdateShoppingState extends HttpServlet {
 		int id = Integer.parseInt((String) request.getParameter("id").trim());
 		String newstate = request.getParameter("newstate").trim();
 		ShoppingDAO.updateStateById(id, newstate);
-		response.sendRedirect("/SecondhandWebsite/userquery.do");
+		String name = "";
+		for(Cookie c:request.getCookies())
+		{
+			if(c.getName().equals("username"))
+			{
+				name = c.getValue();
+				break;
+			}
+			
+		}
+		response.sendRedirect("/SecondhandWebsite/userquery.do?username="+name);
 	}
 
 	/**
