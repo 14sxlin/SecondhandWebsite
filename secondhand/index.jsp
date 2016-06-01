@@ -10,38 +10,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>汕大二手</title>
-<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
+ <script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
 <script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
 <link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css" rel="stylesheet" media="screen"/>
-<link href="css/masonry.css" rel="stylesheet"/>
 <script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
+<!--  
+
+<link href="bootstrap/bootstrap.min.css" rel="stylesheet"/>
+<link href="bootstrap/bootstrap-responsive.min.css" rel="stylesheet"/>
+<script type="text/javascript" src="bootstrap/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="bootstrap/bootstrap.min.js"></script>-->
+<link href="css/masonry.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="js/LoadPage.js"></script>
-<script>
-    $(function() {
-     
-        var masonryNode = $('#masonry');
-        masonryNode.imagesLoaded(function(){
-            masonryNode.masonry({
-                itemSelector: '.thumbnail',
-                isFitWidth: true
-            });
-        });
-         
-         
-    });
-    // 首先将新元素添加到页面容器中
-     
-    masonryNode.append(newItems);
-    // 等待新元素中的图片加载完毕
-    newItems.imagesLoaded(function(){
-     
-    // 调用瀑布流布局的appended方法
-        masonryNode.masonry('appended',  newItems);
-    });
-    
-</script>
 </head>
-<body>
+<body onload="receiveMessage()">
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container-fluid">
@@ -70,14 +53,15 @@
 	                    </ol>
                 </div>
             </div>
-         </div></div>   
-            <div  class="row">
-                <div id="masonry" class="span8 container-fluid"><!-- 宽度 -->
-                    <ul id="ShoppingDisplay" class="thumbnails  col-md-offset-2 ">
+         </div>
+        </div>   <!-- navbar  -->
+          <div  class="row" style="position: relative;left: 10%">
+           <div id="masonry" class="span8 "> <!--     宽度 -->
+              <ul id="ShoppingDisplay" class="thumbnails">
                         <c:forEach items="${ShoppingItems}" var="item">
                            <c:if test="${item!=null}">
-                           <li class="span3">
-                                      <div class="thumbnail ">
+                           <li id="item" class='span3'>
+                                      <div class="thumbnail">
                                       <p>
                                         <c:if test="${item.hasPicture eq '1'}">
                                           <img alt="${item.shoppingname}" src="uploadpicture/${item.username}/${item.shoppingname}.jpg" height="100" />
@@ -97,44 +81,41 @@
 			                                       document.write(getDateDiff("${item.publishdate}"));
 			                                    </script>
                                           <p>
-                                              <a class="btn btn-primary" 
-                                                href="/SecondhandWebsite/shoppingquery.do?id=${item.shopping_id}">详细</a>
-                                            <a class="btn" href="#">联系TA</a>
-                                            </p>
-                                            </div>
-                                            </div>
-                                       </li>
+                                              <a class="btn btn-primary"  href="/SecondhandWebsite/shoppingquery.do?id=${item.shopping_id}">详细</a>
+                                            <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal"
+                                                    onclick="setDestination('${item.username}')">联系TA</button>
+                                        </p>
+                                      </div><!-- caption -->
+                                    </div><!-- thumbnail -->
+                             </li>
+                                       
                            </c:if>
                         </c:forEach>
                     </ul>
-            </div>
-            <div class="span3">
-                    <div class="hero-unit well">
+                 </div><!-- masonry -->
+            </div><!-- row -->
+          <div class="span4" style="position:absolute;right:10%;top:10%;">
+                    <div class="hero-unit well well-lg" style="background-color: white;">
                     <c:choose>
                         <c:when test="${sessionScope.user!=null}">
-                        <div class="panel panel-info">
-						   <div class="panel-heading">
-						      <h3 class="panel-title">  ${sessionScope.user.username}</h3>
-						   </div>
-						   <div class="panel-body">
-						   <a href="jsp/ReleaseProduct.jsp" class="btn btn-default btn-lg btn-block">发布商品</a>
-						  <a class="pager" style="position:relative;left:80%;"
-                                href="userquery.do?username=${sessionScope.user.username}">更多 »</a>
-						   </div>
-						   <div class="panel-footer">
-						           <small><a class="btn btn-info btn-small btn-block" href="logout.do">退出</a></small>
-						   </div>
+                        <div class="panel panel-primary">
+							   <div class="panel-heading">
+							      <h3 id='username' class="panel-title">  ${sessionScope.user.username}</h3>
+							   </div>
+							   <div class="panel-body">
+							   <a href="jsp/ReleaseProduct.jsp" class="btn btn-default btn-lg btn-block">发布商品</a>
+							  <br/>
+							 <button id="MsgButton" type="button" class="btn"  style="width:100%;"
+                                      data-toggle="modal"   data-target="#receiveMsg">
+                                   我的消息<span id="messageCount" class=" badge pull-right"></span>
+                             </button>
+							  <a class="pager" style="position:relative;left:70%;"
+	                                href="userquery.do?username=${sessionScope.user.username}">更多 »</a>
+							   </div>
+							   <div class="panel-footer">
+							           <small><a class="btn btn-info btn-small btn-block" href="logout.do">退出</a></small>
+							   </div>
 						</div>
-	<!--   <h4>
-	                            ${sessionScope.user.username}
-	                           
-	                        </h4>
-	                        <p>
-	                         
-	                        </p>
-	                        <p style="position: relative;left: 80%">
-	                           
-	                        </p>-->   
                         </c:when>
                         <c:otherwise>
                           <ul id="myTab" class="nav nav-tabs">
@@ -151,7 +132,7 @@
                                     String message =(String) session.getAttribute("message");
                                     boolean yes = false;
                                     if(message!=null&&!message.equals(""))
-                                        yes = true;
+                                       yes = true;
                               %>
                               <c:if test="${!empty message}">
                                 <div class="alert alert-danger  alert-dismissable">
@@ -208,9 +189,10 @@
 						  </div>
                         </c:otherwise>
                         </c:choose>
-                    </div>
-            </div>
-            </div>
+                       </div>
+                 </div>
+                        
+                        
               <div class="pagination pagination-centered">
                 <ul>
                     <c:choose>
@@ -263,19 +245,95 @@
                     </c:choose>
                 </ul>
             </div>
-            <script type="text/javascript">
-            var ghostNode = $('#masonry_ghost').find('.thumbnail'), i, ghostIndexArray = [];
-            var ghostCount = ghostNode.length;
-            for(i=0; i<ghostCount; i++){
-                ghostIndexArray[i] = i;
-            }
-            ghostIndexArray.sort(function(a, b) {
-                if(Math.random() > 0.5) {
-                    return a - b;
-                } else {
-                    return b - a;
-                }
-            });
+            <script>
+	            $('#masonry').masonry({
+	            	  // options
+	            	  itemSelector: '#item',
+	            	  columnWidth: 30,
+	            	});
+	            $('#masonry').masonry('reloadItems');
+		</script>
+    <!-- 用于发送信息的模态框 -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+			   aria-labelledby="myModalLabel" aria-hidden="true">
+			   <div class="modal-dialog">
+			      <div class="modal-content">
+			         <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" 
+			               aria-hidden="true">×
+			            </button>
+			            <h4 class="modal-title" id="myModalLabel">
+			              发送站内信
+			            </h4>
+			         </div>
+			         <div class="modal-body">
+			          <label id="sendTo">给谁呢?</label>
+			           <input id="mymessage" type="text" name="message" style="width: 80%">
+			         </div>
+			         <div class="modal-footer">
+			            <button type="button" class="btn btn-default" 
+			               data-dismiss="modal">
+			               取消
+			            </button>
+			            <button type="button" class="btn btn-primary" onclick="sendMessage()">
+			               发送
+			            </button>
+			         </div>
+			      </div><!-- /.modal-content -->
+			   </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<script>
+			   $(function () { $('#myModal').modal('hide');});
+			   
+			   $('#myModal').on('show.bs.modal', function () {
+				   $('#sendTo').html("给"+mto+"发送消息");
+				   $('#myModal').modal('hide')
+				 })
+			</script>
+			<script>
+			   $(function () { $('#myModal').on('hide.bs.modal', function () {
+			      $("#mymessage").val("");
+			      if(goback)
+			          $('#receiveMsg').modal('show');
+			      goback = false;
+			     })
+			   });
+			</script>
+			<!-- 用于查看消息的模态框 -->
+			<div class="modal fade" id="receiveMsg" tabindex="-1" role="dialog" 
+				   aria-labelledby="myModalLabel1" aria-hidden="true">
+				   <div class="modal-dialog">
+				      <div class="modal-content">
+				         <div class="modal-header">
+				            <button type="button" class="close" 
+				               data-dismiss="modal" aria-hidden="true">
+				                  &times;
+				            </button>
+				            <h4 class="modal-title" id="myModalLabe1l">
+				               我的消息
+				            </h4>
+				         </div>
+				         <div id="MsgBox" class="modal-body">
+				         </div>
+				         <div class="modal-footer">
+				            <button type="button" class="btn btn-default" 
+				               data-dismiss="modal">关闭
+				            </button>
+				            <button type="button" class="btn btn-primary" onclick="readAll()">
+				                已阅
+				            </button>
+				         </div>
+				      </div><!-- /.modal-content -->
+				  </div><!-- modal-dialog -->
+			 </div><!-- modal -->
+			 <script>
+               $(function () { $('#receiveMsg').modal('hide');});
+               
+               $('#receiveMsg').on('show.bs.modal', function () {
+                 })
+               $(function () { $('#receiveMsg').on('hide.bs.modal', function () {
+                 })
+               });
             </script>
-</body>
+		</body>
 </html>

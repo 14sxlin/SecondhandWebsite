@@ -17,26 +17,30 @@
 	</div>
    
    
-   <form action="" method="post" class="bootstrap-frm">
+   <form action="../updateInfo" method="post" class="bootstrap-frm">
    <h1>修改基本信息</h1>
-   
+    <input type="hidden" name="type" value="info"/>
+   <input type="hidden" name = "id" value ="${sessionScope.user.stuid}">
    <label>
         <span>用户名 :</span>
-        <input id="username" type="text" name="username" placeholder="请输入用户名" />
+        <input id="username" type="text" name="username" placeholder="请输入用户名" 
+                value = "${sessionScope.user.username}"/>
    </label>
     
     <label>
         <span>长号 :</span>
-        <input id="phonelongnumber" type="text" name="phonelongnumber" placeholder="请输入手机长号" />
+        <input id="phonelongnumber" type="text" name="longnum" placeholder="请输入手机长号"
+                     value = "${sessionScope.user.longnum}"/>
     </label>
     
     <label>
         <span>短号 :</span>
-        <input id="phoneshortnumber" type="text" name="phoneshortnumber" placeholder="请输入手机短号" />
+        <input id="phoneshortnumber" type="text" name="shortnum" placeholder="请输入手机短号"
+                 value = "${sessionScope.user.shortnum}"/>
     </label>   
      <label>
         <span>&nbsp;</span> 
-        <input type="button" class="button" value="修改" /> 
+        <input type="submit" class="button" value="修改" /> 
     </label>    
 </form>
 	

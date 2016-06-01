@@ -5,7 +5,11 @@ document.write("<script type=\"text/javascript\" " +
 document.write("<script type=\"text/javascript\" " +
 		"src=\"js/wantbuyitems.js\" charset=\"utf-8\"></script>");
 document.write("<script type=\"text/javascript\" " +
-		"src=\"message/receivemessage.js\" charset=\"utf-8\"></script>");
+		"src=\"js/MessageReceive.js\" charset=\"utf-8\"></script>");
+document.write("<script type=\"text/javascript\" " +
+"src=\"js/MessageDelete.js\" charset=\"utf-8\"></script>");
+document.write("<script type=\"text/javascript\" " +
+"src=\"js/MessageSend.js\" charset=\"utf-8\"></script>");
 //$(document).ready(
 //		function(){
 //			loadShopping();

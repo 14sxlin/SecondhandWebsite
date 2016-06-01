@@ -3,23 +3,33 @@
  */
 var mfrom;
 var mto;
-var message;
+var message = new String();
 
-function getData(toname)
+function setDestination(name)
 {
-	mfrom = $("#myusername").html();
-	mto = toname;
-	if(mfrom==null)
-    {
-		alert("请先登录");
-		return;
-    }
-	console.log("mfrom="+mfrom+"  mto="+mto);
-	centerPopup();   
-	loadPopup();   
+	mto = name;
 }
 
-function sendMessage(message){
+function sendMessage(){
+	mfrom = $("#username").html();
+	if(mfrom==null||mto==null)
+    {
+		alert("请先登录");
+		$('#mymessage').val("");
+		 $('#myModal').modal('hide');
+		return;
+    }
+	if(mfrom==mto)
+	{
+		alert("不要给自己发信息");
+		 $('#myModal').modal('hide');
+		 $('#mymessage').val("")
+		 return;
+	}
+	
+	//console.log("mfrom="+mfrom+"  mto="+mto);
+	message = $('#mymessage').val();
+	//console.log("message ="+message);
 	$.ajax({
 		url:"sendMessage.do",
 		data:"mfrom="+mfrom+"&mto="+mto+"&message="+message,
@@ -27,23 +37,7 @@ function sendMessage(message){
 		type:"post",
 		success:function(){
 			alert("发送成功");
+			 $('#myModal').modal('hide')
 		}
 	});
 }
-
-$(document).ready(function(){
-	$("#send").click(function(event){
-		event=event||window.event;
-		event.stopPropagation();
-		var message = $("#send_message").val();
-		if(message==""||message==null)
-		{
-			alert("留言不能为空");
-			return;
-		}
-		sendMessage(message);
-		console.log("message="+message);
-		$("#send_message").val("");
-		disablePopup();
-	});
-});

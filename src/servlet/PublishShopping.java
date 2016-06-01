@@ -76,8 +76,8 @@ public class PublishShopping extends HttpServlet {
 			for(FileItem item:filelist)
 			{
 				// TODO System Output Test Block
-//				System.out.println(" item =  "+item.isFormField());
-//				System.out.println(" item =  "+item.getFieldName());
+				System.out.println(" item =  "+item.isFormField());
+				System.out.println(" item =  "+item.getFieldName());
 				if(item!=null&&item.isFormField()&&item.getFieldName()!=null)//如果是文件而不是表单数据
 				{
 					if(item.getFieldName().equals("shoppingname")){
@@ -104,8 +104,8 @@ public class PublishShopping extends HttpServlet {
 						if (!dir.exists())
 							dir.mkdir();
 						File toSave = new File(dir.getPath() + "\\" + shoppingname+".jpg");
-//						System.out.println(" toSave =  " + toSave.getPath());
-//						System.out.println(" size  =  " + item.getSize());
+						System.out.println(" toSave =  " + toSave.getPath());
+						System.out.println(" size  =  " + item.getSize());
 						try {
 							item.write(toSave);
 						} catch (Exception e) {

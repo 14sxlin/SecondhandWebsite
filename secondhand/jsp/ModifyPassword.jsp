@@ -15,9 +15,11 @@
    		</ul>
 	</div>
 	
-   <form action="" method="post" class="bootstrap-frm">
+   <form action="../updateInfo" method="post" class="bootstrap-frm">
     <h1>修改密码 
     </h1>
+    <input type="hidden" name="type" value="password"/>
+    <input type="hidden" name = "id" value ="${sessionScope.user.stuid}">
     <label>
         <span>旧密码 :</span>
         <input id="oldpassword" type="password" name="oldpassword" placeholder="请输入旧密码" />
@@ -25,7 +27,7 @@
     
     <label>
         <span>新密码 :</span>
-        <input id="newpassword" type="password" name="newpassword" placeholder="请输入新密码" />
+        <input id="newpassword" type="password" name="password" placeholder="请输入新密码" />
     </label>
     
     <label>
@@ -34,7 +36,7 @@
     </label>   
      <label>
         <span>&nbsp;</span> 
-        <input type="button" class="button" value="修改" /> 
+        <input type="submit" class="button" value="修改" /> 
     </label>    
 	</form>  
 </body>

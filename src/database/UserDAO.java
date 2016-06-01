@@ -22,4 +22,14 @@ public class UserDAO {
 			return (User)query.list().get(0);
 		else return null;
 	}
+	
+	public static void updateUserInfoById(String id,String name,String longnum,String shortnum) {
+		String hql = "update User set username=?, longnum=?,shortnum = ? where stuid=?";
+		DAOTool.update(hql, name,longnum,shortnum,id);
+	}
+	
+	public static void updatePasswordById(String id,String password) {
+		String hql = "update User set password=? where stuid=?";
+		DAOTool.update(hql, password , id);
+	}
 }

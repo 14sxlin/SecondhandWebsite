@@ -11,6 +11,7 @@
 <link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css" rel="stylesheet" media="screen"/>
 <script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/LoadPage.js"></script>
+<script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
 <title> <mytag:typetrans type="${type}"></mytag:typetrans></title>
 </head>
 <body>
@@ -55,7 +56,7 @@
             <ul  class="thumbnails  col-md-offset-2 ">
                         <c:forEach items="${result}" var="item">
                            <c:if test="${item!=null}">
-                           <li class="span3">
+                           <li id="item" class="span3">
                                       <div class="thumbnail ">
                                       <p>
                                           <c:if test="${item.hasPicture eq '1'}">
@@ -140,5 +141,13 @@
         </div>
     </div>
 </div>
+        <script>
+                $('#masonry').masonry({
+                      // options
+                      itemSelector: '#item',
+                      columnWidth: 30,
+                    });
+                $('#masonry').masonry('reloadItems');
+        </script>
 </body>
 </html>

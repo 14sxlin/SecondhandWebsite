@@ -126,22 +126,17 @@
 						  ${shopping.price }
 						</td>
 					</tr>
-	<!--  				<tr class="info2">
-						<td>
-							长号：
-						</td>
-						<td>
-						//长号
-						</td>
+	  				<tr class="info2">
+						<c:if test="${not empty  user.longnum}">
+							<td>长号:</td><td>${user.longnum }</td>
+							</c:if>
 					</tr>
 					<tr class="info">
-						<td>
-							短号：
-						</td>
-						<td>
-						//短号
-						</td>
-					</tr>-->
+						<c:if test="${not empty  user.shortnum}">
+                           <td> 短号：</td>
+                           <td>${user.shortnum }</td>
+                         </c:if>
+					</tr>
 				</tbody>
 			</table>
 			<p class="table-hover table-striped">

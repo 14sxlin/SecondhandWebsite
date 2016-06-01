@@ -44,6 +44,9 @@ public class ShoppingDAO {
 		return true;
 	}
 	
+	public static void updateUserByName(String oldName,String newName) {
+		DAOTool.update("update Shopping s set s.username=? where s.username=?",newName,oldName);
+	}
 	public static int getTotalCount()
 	{
 		String Hql  = "select count(*) "+hql;

@@ -36,7 +36,6 @@ public class UserLogin extends HttpServlet {
 		}else {
 			//用户名或密码错误
 			request.setAttribute("message", "用户名或密码错误");
-			System.out.println("wrong");
 			request.getRequestDispatcher("welcome").forward(request, response);
 		}
 	}

@@ -45,15 +45,20 @@ public class DAOTool {
 		return query;
 	}
 	
-	public static void update(String hql)
+	public static void update(String hql,String ...params)
 	{
 		Configuration conf = new Configuration().configure();
 		SessionFactory fac = conf.buildSessionFactory();
 		Session session = fac.openSession();
 		Transaction tran = session.beginTransaction();
 		Query update = session.createQuery(hql);
+		for(int i=0;i<params.length;i++)
+		{
+			update.setParameter(i, params[i]);
+		}
 		update.executeUpdate();
 		tran.commit();
+		session.close();
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -8,7 +8,7 @@
 <title>发布商品</title>
 </head>
 <body>
-	<form action="publishShopping.do" method="post" class="release">
+	<form action="../publishShopping.do" method="post" class="release" enctype="multipart/form-data">
     <h1>发布商品</h1>
     
     <label>

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +21,11 @@ public class MessageChange extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println("id = "+id);
-		MessageDAO.updateStateById(id, "read");
+		String id =request.getParameter("ids");
+		String [] ids = id.split(",");
+		for(int i=0;i<ids.length;i++)
+			MessageDAO.updateStateById(Integer.parseInt(ids[i]), "read");
+		response.getWriter().println("OK");
 	}
 
 	/**
