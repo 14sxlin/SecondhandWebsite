@@ -42,8 +42,8 @@ public class UserRegiste extends HttpServlet {
 		session.save(user);
 		tran.commit();
 		
-		response.setContentType("text/charset=utf-8");
-		request.getRequestDispatcher("outcome/registesuccess.html").forward(request, response);
+		request.setAttribute("message", "×¢²á³É¹¦,ÇëµÇÂ¼");
+		request.getRequestDispatcher("welcome").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

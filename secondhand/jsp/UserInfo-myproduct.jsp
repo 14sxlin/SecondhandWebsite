@@ -21,11 +21,12 @@
 <!-- 		<input type="button" value="我要求购" onclick="location='WantToBuy.jsp'"> -->
 		<input type="button" value="退出登录" onclick="location='logout.do'"/>
 		<input type="button" value="修改信息" onclick="location='jsp/ModifyInfo.jsp'"/>		
+		<input type="button" value="返回首页" onclick="location='welcome'"/>		
 	</div>
 		
 	<div class="nav">
 		<ul>
-   		<li><a href="UserInfo-myproduct.jsp">我的商品</a></li>
+   		<li><a href="#">我的商品</a></li>
   <!--  		<li><a href="UserInfo-wanttobuy.jsp">我的求购</a></li>  -->
    		</ul>
 	</div>

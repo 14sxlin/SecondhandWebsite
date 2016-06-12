@@ -23,6 +23,14 @@
 <link href="css/masonry.css" rel="stylesheet"/>
 <script type="text/javascript" src="js/masonry.pkgd.min.js"></script>
 <script type="text/javascript" src="js/LoadPage.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/validateConfig.js"></script>
+<script type="text/javascript" src="js/messages_zh.js"></script>
+<style>
+.error{
+    color:red;
+}
+</style>
 </head>
 <body onload="receiveMessage()">
             <div class="navbar">
@@ -128,12 +136,6 @@
 						 </ul>
 						 <div id="myTabContent" class="tab-content">
 						   <div class="tab-pane fade in active" id="login">
-						             <% 
-                                    String message =(String) session.getAttribute("message");
-                                    boolean yes = false;
-                                    if(message!=null&&!message.equals(""))
-                                       yes = true;
-                              %>
                               <c:if test="${!empty message}">
                                 <div class="alert alert-danger  alert-dismissable">
 								   <button type="button" class="close" data-dismiss="alert" 
@@ -153,33 +155,39 @@
                                 </div>
                             </c:if>
                                 <form action="/SecondhandWebsite/login.do" method="post">
-                                    学号:<input type="text" name="stuid"><br/>
-                                    密码:<input type="password" name="password"><br/>
+                                    学号<br/><input type="text" name="stuid"><br/>
+                                    密码<br/><input type="password" name="password"><br/>
                                           <input class='btn btn-default'
                                           type="submit" value="登录"/>
                                  </form>
 						   </div>
 						   <div class="tab-pane fade" id="register">
-						       <form role="form" action="/SecondhandWebsite/registe.do" method="post">
+						       <form id="RegistForm" style="font-color:red;" role="form" action="/SecondhandWebsite/registe.do" method="post">
 								       <div class="form-group">
-								          <label for="name">学号</label>
-								          <input type="text" class="form-control" id="name" name="stuid">
+								          <label for="stuid">学号</label>
+								          <input type="text" class="form-control" id="stuid" name="stuid"
+								         data-toggle="popover"  data-placement="right" title="">
 								       </div>
 								       <div class="form-group">
-								          <label for="name">用户名</label>
-								          <input type="text" class="form-control" id="name" name="username" >
+								          <label for="username">用户名</label>
+								          <input type="text" class="form-control" id="username" name="username" 
+								          data-toggle="popover"  data-placement="right" title="">
 								       </div>
 								       <div class="form-group">
-								          <label for="name">密码</label>
-								          <input type="password" class="form-control" id="name" name="password" >
+								          <label for="password">密码</label>
+								          <input type="password" class="form-control" id="password" name="password">
 								       </div>
 								       <div class="form-group">
-								          <label for="name">长号</label>
-								          <input type="text" class="form-control" id="name" name="longnum" >
+								          <label for="confirm_password">确认密码</label>
+								          <input type="password" class="form-control" id="confirm_password" name="confirm_password" >
 								       </div>
 								       <div class="form-group">
-								          <label for="name">短号</label>
-								          <input type="text" class="form-control" id="name" name="shortnum">
+								          <label for="longnum">长号</label>
+								          <input type="text" class="form-control" id="longnum" name="longnum" >
+								       </div>
+								       <div class="form-group">
+								          <label for="shortnum">短号</label>
+								          <input type="text" class="form-control" id="shortnum" name="shortnum">
 								       </div>
 								   
 								   <button type="submit" class="btn btn-default">提交</button>
